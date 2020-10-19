@@ -13,6 +13,7 @@ dependencies:
   hooks_riverpod:
   state_notifier:
   freezed_annotation:
+  json_serializable:
   uuid:
 
 dev_dependencies:

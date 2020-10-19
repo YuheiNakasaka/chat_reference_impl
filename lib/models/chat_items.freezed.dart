@@ -8,6 +8,9 @@ part of 'chat_items.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+ChatItems _$ChatItemsFromJson(Map<String, dynamic> json) {
+  return _ChatItems.fromJson(json);
+}
 
 /// @nodoc
 class _$ChatItemsTearOff {
@@ -16,11 +19,16 @@ class _$ChatItemsTearOff {
 // ignore: unused_element
   _ChatItems call(
       {ChatItemsStatus status = ChatItemsStatus.initial,
-      List<ChatItem> chatItems = const <ChatItem>[]}) {
+      @JsonKey(name: 'items') List<ChatItem> chatItems = const <ChatItem>[]}) {
     return _ChatItems(
       status: status,
       chatItems: chatItems,
     );
+  }
+
+// ignore: unused_element
+  ChatItems fromJson(Map<String, Object> json) {
+    return ChatItems.fromJson(json);
   }
 }
 
@@ -31,8 +39,10 @@ const $ChatItems = _$ChatItemsTearOff();
 /// @nodoc
 mixin _$ChatItems {
   ChatItemsStatus get status;
+  @JsonKey(name: 'items')
   List<ChatItem> get chatItems;
 
+  Map<String, dynamic> toJson();
   $ChatItemsCopyWith<ChatItems> get copyWith;
 }
 
@@ -40,7 +50,9 @@ mixin _$ChatItems {
 abstract class $ChatItemsCopyWith<$Res> {
   factory $ChatItemsCopyWith(ChatItems value, $Res Function(ChatItems) then) =
       _$ChatItemsCopyWithImpl<$Res>;
-  $Res call({ChatItemsStatus status, List<ChatItem> chatItems});
+  $Res call(
+      {ChatItemsStatus status,
+      @JsonKey(name: 'items') List<ChatItem> chatItems});
 }
 
 /// @nodoc
@@ -70,7 +82,9 @@ abstract class _$ChatItemsCopyWith<$Res> implements $ChatItemsCopyWith<$Res> {
           _ChatItems value, $Res Function(_ChatItems) then) =
       __$ChatItemsCopyWithImpl<$Res>;
   @override
-  $Res call({ChatItemsStatus status, List<ChatItem> chatItems});
+  $Res call(
+      {ChatItemsStatus status,
+      @JsonKey(name: 'items') List<ChatItem> chatItems});
 }
 
 /// @nodoc
@@ -95,20 +109,25 @@ class __$ChatItemsCopyWithImpl<$Res> extends _$ChatItemsCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
+
 /// @nodoc
 class _$_ChatItems extends _ChatItems with DiagnosticableTreeMixin {
   _$_ChatItems(
       {this.status = ChatItemsStatus.initial,
-      this.chatItems = const <ChatItem>[]})
+      @JsonKey(name: 'items') this.chatItems = const <ChatItem>[]})
       : assert(status != null),
         assert(chatItems != null),
         super._();
 
+  factory _$_ChatItems.fromJson(Map<String, dynamic> json) =>
+      _$_$_ChatItemsFromJson(json);
+
   @JsonKey(defaultValue: ChatItemsStatus.initial)
   @override
   final ChatItemsStatus status;
-  @JsonKey(defaultValue: const <ChatItem>[])
   @override
+  @JsonKey(name: 'items')
   final List<ChatItem> chatItems;
 
   bool _did_map = false;
@@ -162,16 +181,26 @@ class _$_ChatItems extends _ChatItems with DiagnosticableTreeMixin {
   @override
   _$ChatItemsCopyWith<_ChatItems> get copyWith =>
       __$ChatItemsCopyWithImpl<_ChatItems>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ChatItemsToJson(this);
+  }
 }
 
 abstract class _ChatItems extends ChatItems {
   _ChatItems._() : super._();
-  factory _ChatItems({ChatItemsStatus status, List<ChatItem> chatItems}) =
-      _$_ChatItems;
+  factory _ChatItems(
+      {ChatItemsStatus status,
+      @JsonKey(name: 'items') List<ChatItem> chatItems}) = _$_ChatItems;
+
+  factory _ChatItems.fromJson(Map<String, dynamic> json) =
+      _$_ChatItems.fromJson;
 
   @override
   ChatItemsStatus get status;
   @override
+  @JsonKey(name: 'items')
   List<ChatItem> get chatItems;
   @override
   _$ChatItemsCopyWith<_ChatItems> get copyWith;

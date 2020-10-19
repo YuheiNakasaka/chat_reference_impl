@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chat_items.freezed.dart';
+part 'chat_items.g.dart';
 
 enum ChatItemsStatus {
   initial,
@@ -18,8 +19,11 @@ enum ChatItemsStatus {
 abstract class ChatItems implements _$ChatItems {
   factory ChatItems({
     @Default(ChatItemsStatus.initial) ChatItemsStatus status,
-    @Default(<ChatItem>[]) List<ChatItem> chatItems,
+    @Default(<ChatItem>[]) @JsonKey(name: 'items') List<ChatItem> chatItems,
   }) = _ChatItems;
+
+  factory ChatItems.fromJson(Map<String, dynamic> json) =>
+      _$ChatItemsFromJson(json);
 
   ChatItems._();
 

@@ -8,6 +8,9 @@ part of 'chat_item.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+ChatItem _$ChatItemFromJson(Map<String, dynamic> json) {
+  return _ChatItem.fromJson(json);
+}
 
 /// @nodoc
 class _$ChatItemTearOff {
@@ -16,7 +19,7 @@ class _$ChatItemTearOff {
 // ignore: unused_element
   _ChatItem call(
       {String id = '',
-      @required String userId,
+      @required @JsonKey(name: 'user_id') String userId,
       String message = '',
       DateTime createdAt}) {
     return _ChatItem(
@@ -25,6 +28,11 @@ class _$ChatItemTearOff {
       message: message,
       createdAt: createdAt,
     );
+  }
+
+// ignore: unused_element
+  ChatItem fromJson(Map<String, Object> json) {
+    return ChatItem.fromJson(json);
   }
 }
 
@@ -35,10 +43,12 @@ const $ChatItem = _$ChatItemTearOff();
 /// @nodoc
 mixin _$ChatItem {
   String get id;
+  @JsonKey(name: 'user_id')
   String get userId;
   String get message;
   DateTime get createdAt;
 
+  Map<String, dynamic> toJson();
   $ChatItemCopyWith<ChatItem> get copyWith;
 }
 
@@ -46,7 +56,11 @@ mixin _$ChatItem {
 abstract class $ChatItemCopyWith<$Res> {
   factory $ChatItemCopyWith(ChatItem value, $Res Function(ChatItem) then) =
       _$ChatItemCopyWithImpl<$Res>;
-  $Res call({String id, String userId, String message, DateTime createdAt});
+  $Res call(
+      {String id,
+      @JsonKey(name: 'user_id') String userId,
+      String message,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -79,7 +93,11 @@ abstract class _$ChatItemCopyWith<$Res> implements $ChatItemCopyWith<$Res> {
   factory _$ChatItemCopyWith(_ChatItem value, $Res Function(_ChatItem) then) =
       __$ChatItemCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String userId, String message, DateTime createdAt});
+  $Res call(
+      {String id,
+      @JsonKey(name: 'user_id') String userId,
+      String message,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -108,18 +126,27 @@ class __$ChatItemCopyWithImpl<$Res> extends _$ChatItemCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
+
 /// @nodoc
 class _$_ChatItem with DiagnosticableTreeMixin implements _ChatItem {
   const _$_ChatItem(
-      {this.id = '', @required this.userId, this.message = '', this.createdAt})
+      {this.id = '',
+      @required @JsonKey(name: 'user_id') this.userId,
+      this.message = '',
+      this.createdAt})
       : assert(id != null),
         assert(userId != null),
         assert(message != null);
+
+  factory _$_ChatItem.fromJson(Map<String, dynamic> json) =>
+      _$_$_ChatItemFromJson(json);
 
   @JsonKey(defaultValue: '')
   @override
   final String id;
   @override
+  @JsonKey(name: 'user_id')
   final String userId;
   @JsonKey(defaultValue: '')
   @override
@@ -170,18 +197,26 @@ class _$_ChatItem with DiagnosticableTreeMixin implements _ChatItem {
   @override
   _$ChatItemCopyWith<_ChatItem> get copyWith =>
       __$ChatItemCopyWithImpl<_ChatItem>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ChatItemToJson(this);
+  }
 }
 
 abstract class _ChatItem implements ChatItem {
   const factory _ChatItem(
       {String id,
-      @required String userId,
+      @required @JsonKey(name: 'user_id') String userId,
       String message,
       DateTime createdAt}) = _$_ChatItem;
+
+  factory _ChatItem.fromJson(Map<String, dynamic> json) = _$_ChatItem.fromJson;
 
   @override
   String get id;
   @override
+  @JsonKey(name: 'user_id')
   String get userId;
   @override
   String get message;
